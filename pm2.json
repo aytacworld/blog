@@ -1,0 +1,18 @@
+{
+  "apps": [
+    {
+      "name": "adem",
+      "script": "npm",
+      "args": "start",
+      "instances": 1,
+      "exec_mode": "fork",
+      "env": {
+        "NODE_ENV": "production",
+        "USERNAME": "adem",
+        "FQDN": "ayt.ac",
+        "APP_NAME": "adem",
+        "PORT": "8016"
+      }
+    }
+  ]
+}
