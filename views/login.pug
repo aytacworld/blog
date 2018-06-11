@@ -1,0 +1,10 @@
+extends ./layout.pug
+
+block content
+  form(action='/l' method='POST')
+    h1Please sign in
+    label(for='inputUsername') Username
+    input#inputUsername(type='text' placeholder='Username' name='username' required autofocus)
+    label(for='inputPassword') Password
+    input#inputPassword(type='password' placeholder='Password' name='password' required)
+    button(type='submit') Login

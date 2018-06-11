@@ -1,0 +1,6 @@
+mixin tags(post)
+  .tags Tags:
+    = ' '
+    each tag in post.tags
+      a(href=`/?t=${tag}`) #{tag}
+      = ', '

@@ -1,0 +1,25 @@
+doctype xml
+rss(version='2.0', xmlns:atom='<a href="http://www.w3.org/2005/Atom" rel="nofollow">http://www.w3.org/2005/Atom</a>')
+  channel
+    title Adem Aytaç
+    link
+      a(href="#{host}" rel="nofollow") #{host}
+    atom:link(href=`<a href="${host}/rss" rel="nofollow">#{host}/rss</a>`, rel='self', type='application/rss+xml')
+    description My personal blog.
+    language en-US
+    if posts.length
+      lastBuildDate= new Date(posts[0].publishedAt).toUTCString()
+    each post in posts
+      item
+        title= post.title
+        link
+          a(href=`${host}/p/${post.slug}` rel="nofollow") #{host}/p/#{post.slug}
+        description
+          | <![CDATA[
+          | !{post.teaser}
+          p
+            a(href=`${host}/p/${post.slug}` rel="nofollow") #{host}/p/#{post.slug} Read more &raquo;
+          | ]]>
+        pubDate= new Date(post.publishedAt).toUTCString()
+        guid(isPermaLink='false')
+          a(href=`${host}/p/${post.slug}` rel="nofollow") http://devsmash.com/blog/#{post.slug}

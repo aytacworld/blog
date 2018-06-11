@@ -7,10 +7,6 @@
       "instances": 1,
       "exec_mode": "fork",
       "env": {
-        "NODE_ENV": "production",
-        "USERNAME": "adem",
-        "FQDN": "ayt.ac",
-        "APP_NAME": "adem",
         "PORT": "8016"
       }
     }

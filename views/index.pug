@@ -1,0 +1,22 @@
+extends ./layout.pug
+
+block content
+  if posts[0]
+    each post in posts
+      article
+        a(href=`/p/${post.slug}`)
+          +blogtitle(post, user)
+        .body !{post.teaser}
+        +tags(post)
+  else
+    article
+      h2 No posts
+  if nav.show
+    .navigation
+      a(href='/') <<
+      = ' '
+      a(href=`/?p=${nav.prev}`) <
+      = ' '
+      a(href=`/?p=${nav.next}`) >
+      = ' '
+      a(href=`/?p=${nav.last}`) >>

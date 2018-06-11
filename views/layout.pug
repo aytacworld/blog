@@ -1,0 +1,38 @@
+include ./components/title.pug
+include ./components/tags.pug
+
+doctype html
+html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
+  head
+    meta(content='utf-8' http-equiv='encoding')
+    meta(name='viewport' content='width=device-width,height=device-height,maximum-scale=1.0,initial-scale=1.0,user-scalable=no,shrink-to-fit=no')
+    meta(name='description' content='Hello World')
+    title Hello World
+    //- link(href="https://fonts.googleapis.com/css?family=Indie+Flower|Source+Code+Pro" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet")
+    link(href="/public/app.css" rel="stylesheet")
+  body
+    .content
+      header
+        h1 Hello World
+        a(href='/') Home
+        = ' | '
+        if user
+          a(href='/e') Add
+          = ' | '
+          a(href='/l') Logout
+        else
+          a(href='/l') Login
+
+      block content
+      footer
+        .subscribe
+          a(href='/rss') rss
+          = ' '
+          a(href='https://twitter.com/aytacworld') twitter
+          = ' '
+          a(href='https://github.com/aytacworld') github
+          = ' '
+          a(href='mailto:adem@aytacworld.com') mail
+        .copy &copy; 2018 Aytacworld
+      block scripts

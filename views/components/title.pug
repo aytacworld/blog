@@ -1,0 +1,6 @@
+mixin blogtitle(post, user)
+  h2 #{post.title}
+    small  (#{(new Date(post.createdAt)).toISOString().split('T')[0]})
+    if user
+      small
+        a(href=`/e/${post.id}`) edit
