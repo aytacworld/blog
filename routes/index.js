@@ -37,7 +37,7 @@ class Routes {
 
     this.router.get('/p/:slug', async (req, res) => {
       const post = await Posts.getBySlug(req.params.slug);
-      if (!req.user && !post.published) {
+      if ((!post) || (!req.user && !post.published)) {
         res.redirect('/');
       }
       post.body = marked(post.body);
