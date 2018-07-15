@@ -1,5 +1,6 @@
 include ./components/title.pug
 include ./components/tags.pug
+include ./components/form.pug
 
 doctype html
 html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
@@ -20,9 +21,8 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
           a(href='/e') Add
           = ' | '
           a(href='/l') Logout
-        //- else
-          = ' | '
-          a(href='/l') Login
+        = ' | '
+        a(href='/s') Search
 
       block content
       footer

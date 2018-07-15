@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Comment = require('./comment');
 
 const { Schema } = mongoose;
+const limit = 10;
 
 const PostSchema = new Schema({
   title: { type: String, required: true, trim: true },
@@ -31,23 +32,25 @@ PostSchema.pre('save', function presave(next) {
 
 const Post = mongoose.model('Post', PostSchema);
 
+function sortPosts(oldQuery, pg) {
+  let query = oldQuery;
+  return new Promise((resolve, reject) => {
+    if (pg !== undefined) {
+      query = query.skip((pg > 0 ? pg - 1 : 0) * limit)
+        .limit(limit);
+    }
+    query.sort({ createdAt: 'desc' })
+      .exec((err, posts) => {
+        if (err) return reject(err);
+        return resolve(posts);
+      });
+  });
+}
+
 class PostCollection {
   static async get(queryObject = {}, pg) {
-    const limit = 10;
-
-    return new Promise((resolve, reject) => {
-      let query = Post.find(queryObject);
-
-      if (pg !== undefined) {
-        query = query.skip((pg > 0 ? pg - 1 : 0) * limit)
-          .limit(limit);
-      }
-      query.sort({ createdAt: 'desc' })
-        .exec((err, posts) => {
-          if (err) return reject(err);
-          return resolve(posts);
-        });
-    });
+    const query = Post.find(queryObject);
+    return sortPosts(query, pg);
   }
 
   static async getPublished(pg) {
@@ -77,6 +80,22 @@ class PostCollection {
           return resolve(post);
         });
     });
+  }
+
+  static async search(keywords, pg, searchAll) {
+    const queryRegex = { $regex: keywords.replace(/\s/g, '|'), $options: 'gi' };
+    const firstQuery = searchAll ? {} : { published: true };
+    let query = Post.find(firstQuery);
+
+    query = query.or([
+      { title: queryRegex },
+      { teaser: queryRegex },
+      { body: queryRegex },
+      { category: queryRegex },
+      { tags: queryRegex },
+    ]);
+
+    return sortPosts(query, pg);
   }
 
   static async count(pg) {

@@ -1,0 +1,32 @@
+mixin form-input(name, type, value, label)
+  - var capName = label || name.replace(/\b\w/g, l => l.toUpperCase())
+  div.form-control
+    label #{capName}
+      input(type=`${type || 'text'}` placeholder=`${capName}` name=`${name}` value=`${value || ''}`)
+
+mixin form-input-req(name, type, value, label)
+  - var capName = label || name.replace(/\b\w/g, l => l.toUpperCase())
+  div.form-control
+    label #{capName}
+      input(type=`${type || 'text'}` placeholder=`${capName}` name=`${name}` value=`${value || ''}` required)
+
+mixin form-text(name, maxlength, value, label)
+  - var capName = label || name.replace(/\b\w/g, l => l.toUpperCase())
+  div.form-control
+    label #{capName}
+      textarea(placeholder=`${capName}` name=`${name}` maxlength=`${maxlength || ''}`) #{value || ''}
+
+mixin form-text-req(name, maxlength, value, label)
+  - var capName = label || name.replace(/\b\w/g, l => l.toUpperCase())
+  div.form-control
+    label #{capName}
+      textarea(placeholder=`${capName}` name=`${name}`  maxlength=`${maxlength || ''}` required) #{value || ''}
+
+mixin form-checkbox(name, text, value)
+  div.form-control
+    label #{text}
+      input(name=`${name}` type='checkbox', checked=`${value || 'false'}`)
+
+mixin form-submit(name)
+  div.form-control
+    button(type='submit') #{name || 'Submit'}

@@ -3,11 +3,6 @@ extends ./layout.pug
 block content
   h1 Please sign in
   form(method='POST' action='/l')
-    div.form-control
-      label(for='inputUsername') Username
-      input#inputUsername(type='text' placeholder='Username' name='username' required autofocus)
-    div.form-control
-      label(for='inputPassword') Password
-      input#inputPassword(type='password' placeholder='Password' name='password' required)
-    div.form-control
-      button(type='submit') Login
+    +form-input-req('username')
+    +form-input-req('password', 'password')
+    +form-submit()

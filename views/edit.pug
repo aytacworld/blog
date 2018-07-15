@@ -3,25 +3,10 @@ extends ./layout.pug
 block content
   form(method='POST' action='/e')
     input(name='id', type='hidden', value=`${id || ''}`)
-    div.form-control
-      label Title
-        input(name='title', value=`${title || ''}`)
-    div.form-control
-      label Teaser
-        textarea(name='teaser', maxlength='150') #{teaser || ''}
-    div.form-control
-      label Content
-        textarea(name='body') #{body || ''}
-    div.form-control
-      label Category
-        input(name='category', value=`${category || ''}`)
-    div.form-control
-      label Tags
-        input(name='tags', value=`${tags || ''}`)
-        //- change the input to an autocomplete or create a checkbox group with existing tags and input for adding new tags
-    div.form-control
-      label Publish on submit
-        input(name='published' type='checkbox', checked=`${published || 'false'}`)
-    div.form-control
-      button(type='submit') Submit
-
+    +form-input('title', undefined, title)
+    +form-text('teaser', 150, teaser)
+    +form-text('body', undefined, body)
+    +form-input('category', undefined, category)
+    +form-input('tags', undefined, tags)
+    +form-checkbox('published', 'Is online', published)
+    +form-submit()

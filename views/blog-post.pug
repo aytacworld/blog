@@ -9,17 +9,10 @@ block content
       form(method='POST' action='/c')
         input(name='postid', type='hidden', value=`${post.id}`)
         input(name='postslug', type='hidden', value=`${post.slug}`)
-        div.form-control
-          label Name
-            input(name='name')
-        div.form-control
-          label Email
-            input(name='email')
-        div.form-control
-          label Comment
-            textarea(name='message', maxlength='150')
-        div.form-control
-          button(type='submit') Submit
+        +form-input('name')
+        +form-input('email')
+        +form-text-req('message')
+        +form-submit()
     .comments
       each comment in post.comments
         .comment(id=`${comment.id}`)

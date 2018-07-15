@@ -17,7 +17,9 @@ class Routes {
     this.router.get('/', async (req, res) => {
       let posts = [];
       const pg = req.query.p === 'all' ? undefined : parseInt(req.query.p, 10) || 0;
-      if (req.user) {
+      if (req.query.s) {
+        posts = await Posts.search(req.query.s, pg, Boolean(req.user));
+      } else if (req.user) {
         posts = await Posts.get({}, pg);
       } else if (req.query.t) {
         posts = await Posts.getByTag(req.query.t, pg);
@@ -47,6 +49,10 @@ class Routes {
     this.router.get('/rss', async (req, res) => {
       const posts = await Posts.getPublished();
       res.render('rss', { posts, host: `${req.protocol}://${req.get('host')}` });
+    });
+
+    this.router.get('/s', (req, res) => {
+      res.render('search', { user: req.user });
     });
   }
 

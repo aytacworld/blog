@@ -49,6 +49,7 @@ article {
   border: 1px solid #767676;
   margin-bottom: 5px;
   padding: 3px;
+  word-wrap: break-word;
 }
 
 pre {

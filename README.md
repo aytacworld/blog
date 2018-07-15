@@ -12,11 +12,6 @@ If you like it you can clone the repo and start using it for your own blog.
 
 `git clone https://github.com/aytacworld/blog.git`
 
-## Todo
-
-- add twitter functionality (auto tweet, when publishing a post)
-- add search
-
 ## MIT License
 
 Copyright (c) 2018 Adem Aytaç

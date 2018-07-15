@@ -1,0 +1,6 @@
+extends ./layout.pug
+
+block content
+  form(method='GET' action="/")
+    +form-input-req('s', undefined, undefined, 'Search')
+    +form-submit()
