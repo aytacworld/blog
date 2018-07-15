@@ -8,7 +8,6 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
     meta(name='viewport' content='width=device-width,height=device-height,maximum-scale=1.0,initial-scale=1.0,user-scalable=no,shrink-to-fit=no')
     meta(name='description' content='Hello World')
     title Hello World
-    //- link(href="https://fonts.googleapis.com/css?family=Indie+Flower|Source+Code+Pro" rel="stylesheet")
     link(href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet")
     link(href="/public/app.css" rel="stylesheet")
   body
@@ -16,12 +15,13 @@ html(xmlns='http://www.w3.org/1999/xhtml' lang='en')
       header
         h1 Hello World
         a(href='/') Home
-        = ' | '
         if user
+          = ' | '
           a(href='/e') Add
           = ' | '
           a(href='/l') Logout
-        else
+        //- else
+          = ' | '
           a(href='/l') Login
 
       block content

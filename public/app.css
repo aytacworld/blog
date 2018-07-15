@@ -1,6 +1,5 @@
 * {
   font-family: 'Source Code Pro', monospace;
-  /* font-family: 'Indie Flower', cursive; */
   margin: 0;
   padding: 0;
 }
@@ -58,7 +57,6 @@ pre {
 }
 
 code {
-  /* font-family: 'Source Code Pro', monospace; */
   font-size: .8rem;
   color: #ff1010;
   background-color: #ddd;
