@@ -92,3 +92,11 @@ pre code {
 .comments .comment:first-child {
   border-top: none;
 }
+
+.body {
+  padding: 0 5px 0 5px;
+}
+
+.body p {
+  padding-top: 1rem;
+}
