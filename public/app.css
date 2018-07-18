@@ -55,6 +55,7 @@ article {
 pre {
   background: #ddd;
   padding: 5px;
+  overflow: auto;
 }
 
 code {
