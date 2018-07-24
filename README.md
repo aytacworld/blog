@@ -8,9 +8,17 @@ Backend is written in javascript using node. Frontend will not include any javas
 
 If you like it you can clone the repo and start using it for your own blog.
 
-## Installation
+## TODO
 
-`git clone https://github.com/aytacworld/blog.git`
+- add publish date to Post model
+- password hashing
+- voting(post/comment)
+- reply on comment?
+- search by date
+- create REST api
+- Angular/React version
+- Terminal app for posting
+- .md file upload
 
 ## MIT License
 
