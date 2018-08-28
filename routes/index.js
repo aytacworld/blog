@@ -1,13 +1,10 @@
-const { passport } = require('@aytacworld/express-login');
 const marked = require('marked');
 const { Router } = require('express');
-const { ensureLoggedIn } = require('connect-ensure-login');
 const Posts = require('../database/post');
 
 class Routes {
   constructor() {
     this.router = Router();
-    this.authRouting();
     this.editPostRouting();
     this.readPostRouting();
     this.commentRouting();
@@ -57,7 +54,7 @@ class Routes {
   }
 
   editPostRouting() {
-    this.router.get('/e(/:id)?', ensureLoggedIn('/l'), async (req, res) => {
+    this.router.get('/e(/:id)?', async (req, res) => {
       const resBody = { id: req.params.id, user: req.user };
       if (req.params.id) {
         const post = await Posts.getById(req.params.id);
@@ -73,37 +70,13 @@ class Routes {
       res.render('edit', resBody);
     });
 
-    this.router.post('/e', ensureLoggedIn('/l'), async (req, res) => {
+    this.router.post('/e', async (req, res) => {
       if (req.body.id) {
         await Posts.save(req.body);
       } else {
         await Posts.add(req.body);
       }
       res.redirect('/');
-    });
-  }
-
-  authRouting() {
-    this.router.get('/l', (req, res) => {
-      if (req.user) {
-        req.logout();
-        res.redirect('/');
-      } else {
-        res.render('login');
-      }
-    });
-
-    this.router.post('/l', (req, res, next) => {
-      passport.authenticate('local', (err, user) => {
-        if (err) next(err);
-        else if (!user) res.redirect('/l?e=true');
-        else {
-          req.logIn(user, (err2) => {
-            if (err2) return next(err2);
-            return res.redirect('/');
-          });
-        }
-      })(req, res, next);
     });
   }
 

@@ -7,12 +7,11 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "node start.js"
+    "start": "node start.js",
+    "dev": "rm -rf repo && REPOSITORY=\"~/test/posts-repo\" node start.js"
   },
   "dependencies": {
     "@aytacworld/express": "^1.0.5",
-    "@aytacworld/express-login": "^1.0.2",
-    "connect-ensure-login": "^0.1.1",
     "express": "^4.16.3",
     "marked": "^0.4.0",
     "mongoose": "^5.1.6"
