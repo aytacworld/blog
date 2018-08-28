@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 8016;
 (async () => {
   await Git.clone();
   // mongoose.connect(CONNECTION_STRING);
+  const changes = await Git.listChanges();
+  console.log(changes);
 
   const app = new Express({
     templatePath: path.resolve(__dirname, 'views'),

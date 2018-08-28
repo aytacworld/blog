@@ -1,18 +1,27 @@
 const { exec } = require('child_process');
 const path = require('path');
 
-const repoPath = process.env.REPOSITORY;
+const repoRemotePath = process.env.REPOSITORY;
+const repoPath = path.resolve(__dirname, '..', 'repo');
 
 module.exports = class Git {
-  static async init() {
+  static async clone() {
     return new Promise((resolve, reject) => {
-      exec(`git clone ${repoPath} "${path.resolve(__dirname, '..', 'repo')}"`, (err, stdout, stderr) => {
-        if (err) return reject(err);
-        console.log('stdout', stdout, 'stderr', stderr);
-        return resolve();
-      });
+      exec(`git clone ${repoRemotePath} "${repoPath}"`, err => (err ? reject(err) : resolve()));
     });
   }
-  // show all changes
-  // git fetch && git diff-tree --no-commit-id --name-status -r HEAD^..origin/master
+
+  static async listChanges() {
+    return new Promise((resolve, reject) => {
+      exec(`cd "${repoPath}" && git fetch && git diff-tree --no-commit-id --name-status -r HEAD^..origin/master`,
+        (err, stdout) => {
+          if (err) return reject(err);
+          const files = stdout
+            .split('\n')
+            .filter(f => f)
+            .map(f => f.split('\t'));
+          return resolve(files);
+        });
+    });
+  }
 };
