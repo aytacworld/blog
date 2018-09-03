@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8016;
 
 (async () => {
   await git.clone();
-  await db.sync();
+  await db.initDatabase();
 
   const app = new Express({
     templatePath: path.resolve(__dirname, 'views'),

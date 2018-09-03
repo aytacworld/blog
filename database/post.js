@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Comment = require('./comment');
+// const Comment = require('./comment');
 
 const { Schema } = mongoose;
 const limit = 10;
@@ -14,7 +14,7 @@ const PostSchema = new Schema({
   published: { type: Boolean, required: true, default: false },
   createdAt: { type: Number },
   updatedAt: { type: Number },
-  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  // comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
 });
 
 // update timestamps on save
@@ -72,7 +72,7 @@ class PostCollection {
   static async getBySlug(slug) {
     return new Promise((resolve, reject) => {
       Post.findOne({ slug })
-        .populate('comments')
+        // .populate('comments')
         .exec((err, post) => {
           if (err) return reject(err);
           return resolve(post);
@@ -136,29 +136,29 @@ class PostCollection {
     });
   }
 
-  static async addComment(postId, comment) {
-    return new Promise((resolve, reject) => {
-      const c = new Comment({
-        name: comment.name,
-        email: comment.email,
-        message: comment.message,
-      });
+  // static async addComment(postId, comment) {
+  //   return new Promise((resolve, reject) => {
+  //     const c = new Comment({
+  //       name: comment.name,
+  //       email: comment.email,
+  //       message: comment.message,
+  //     });
 
-      c.save(async (err) => {
-        if (err) return reject(err);
-        try {
-          const p = await PostCollection.getById(postId);
-          p.comments.push(c.id);
-          return p.save((err2) => {
-            if (err2) return reject(err2);
-            return resolve();
-          });
-        } catch (err3) {
-          return reject(err3);
-        }
-      });
-    });
-  }
+  //     c.save(async (err) => {
+  //       if (err) return reject(err);
+  //       try {
+  //         const p = await PostCollection.getById(postId);
+  //         p.comments.push(c.id);
+  //         return p.save((err2) => {
+  //           if (err2) return reject(err2);
+  //           return resolve();
+  //         });
+  //       } catch (err3) {
+  //         return reject(err3);
+  //       }
+  //     });
+  //   });
+  // }
 }
 
 // create and export our model
