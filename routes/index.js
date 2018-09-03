@@ -61,7 +61,6 @@ class Routes {
         if (post) {
           resBody.title = post.title;
           resBody.body = post.body;
-          resBody.category = post.category;
           resBody.tags = post.tags;
           resBody.published = post.published;
         }
