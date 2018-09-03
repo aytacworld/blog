@@ -16,7 +16,7 @@ rss(version='2.0', xmlns:atom='<a href="http://www.w3.org/2005/Atom" rel="nofoll
           a(href=`${host}/p/${post.slug}` rel="nofollow") #{host}/p/#{post.slug}
         description
           | <![CDATA[
-          | !{post.teaser}
+          | !{post.body.substring(0, 150)}
           p
             a(href=`${host}/p/${post.slug}` rel="nofollow") #{host}/p/#{post.slug} Read more &raquo;
           | ]]>

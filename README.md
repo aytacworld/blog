@@ -19,7 +19,6 @@ If you like it you can clone the repo and start using it for your own blog.
 - Angular/React version
 - Terminal app for posting
 - .md file upload
-- if teaser is empty, then use the body (but trimmed to 200 chars)
 - rss publish the whole body?
 - add oauth server capabilities, so I can create desktop/terminal app to post
 

@@ -6,7 +6,7 @@ block content
       article
         a(href=`/p/${post.slug}`)
           +blogtitle(post, user)
-        .body !{post.teaser}
+        .body !{post.body.substring(0, 150)}
         +tags(post)
   else
     article

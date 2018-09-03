@@ -10,7 +10,6 @@ const PostSchema = new Schema({
     type: String, lowercase: true, trim: true, index: { unique: true },
   },
   body: { type: String, required: true },
-  teaser: { type: String, required: true, maxlength: 150 },
   category: { type: String, required: true },
   tags: [String],
   published: { type: Boolean, required: true, default: false },
@@ -89,7 +88,6 @@ class PostCollection {
 
     query = query.or([
       { title: queryRegex },
-      { teaser: queryRegex },
       { body: queryRegex },
       { category: queryRegex },
       { tags: queryRegex },
@@ -117,7 +115,6 @@ class PostCollection {
       try {
         const p = await PostCollection.getById(post.id);
         p.title = post.title;
-        p.teaser = post.teaser;
         p.body = post.body;
         p.category = post.category;
         p.tags = post.tags;

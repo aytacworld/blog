@@ -4,7 +4,6 @@ block content
   form(method='POST' action='/e')
     input(name='id', type='hidden', value=`${id || ''}`)
     +form-input('title', undefined, title)
-    +form-text('teaser', 150, teaser)
     +form-text('body', undefined, body)
     +form-input('category', undefined, category)
     +form-input('tags', undefined, tags)

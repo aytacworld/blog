@@ -60,7 +60,6 @@ class Routes {
         const post = await Posts.getById(req.params.id);
         if (post) {
           resBody.title = post.title;
-          resBody.teaser = post.teaser;
           resBody.body = post.body;
           resBody.category = post.category;
           resBody.tags = post.tags;

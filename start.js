@@ -1,19 +1,16 @@
 const path = require('path');
-// const mongoose = require('mongoose');
 const Express = require('@aytacworld/express');
 
-const Git = require('./tools/git-utils');
+const git = require('./tools/git-utils');
+const db = require('./tools/db-utils');
 
 const Routes = require('./routes/index');
 
-// const CONNECTION_STRING = 'mongodb://localhost:27017/blog';
 const PORT = process.env.PORT || 8016;
 
 (async () => {
-  await Git.clone();
-  // mongoose.connect(CONNECTION_STRING);
-  const changes = await Git.listChanges();
-  console.log(changes);
+  await git.clone();
+  await db.sync();
 
   const app = new Express({
     templatePath: path.resolve(__dirname, 'views'),
