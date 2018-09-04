@@ -8,7 +8,8 @@
   "private": true,
   "scripts": {
     "start": "node start.js",
-    "dev": "rm -rf repo && REPOSITORY=\"~/test/posts-repo\" node start.js"
+    "dev": "rm -rf repo && REPOSITORY=\"~/test/posts-repo\" node start.js",
+    "clear": "rm -rf repo"
   },
   "dependencies": {
     "@aytacworld/express": "^1.0.5",

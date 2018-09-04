@@ -24,7 +24,7 @@ PostSchema.pre('save', function presave(next) {
     this.createdAt = this.updatedAt;
     this.slug = `${this.title.replace(/\s/g, '-').substring(0, 15)}-${this.createdAt}`;
   }
-  this.tags = this.tags[0].replace(/\s/g, '').split(',');
+  this.tags = this.tags ? this.tags[0].replace(/\s/g, '').split(',') : [];
   next();
 });
 
@@ -103,7 +103,7 @@ class PostCollection {
       const p = new Post(Object.assign({}, post, { published: post.published === 'on' }));
       p.save((err) => {
         if (err) return reject(err);
-        return resolve();
+        return resolve(p);
       });
     });
   }
@@ -129,6 +129,16 @@ class PostCollection {
   static async delete(id) {
     return new Promise((resolve, reject) => {
       Post.deleteOne({ _id: id })
+        .exec((err) => {
+          if (err) return reject(err);
+          return resolve();
+        });
+    });
+  }
+
+  static async deleteAll() {
+    return new Promise((resolve, reject) => {
+      Post.remove({})
         .exec((err) => {
           if (err) return reject(err);
           return resolve();
