@@ -1,0 +1,15 @@
+- Main
+  + remove yarn
+  - create config
+    - rss info
+    - database info
+    - repo info
+- onStart
+  - empty database
+  - clone repo
+  - copy repo to database
+- onUpdate
+  - pull repo
+  - add new posts
+  - edit modified posts
+  - delete deleted posts
