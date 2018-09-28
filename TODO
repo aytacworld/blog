@@ -1,9 +1,9 @@
 - Main
   + remove yarn
-  - create config
-    - rss info
-    - database info
-    - repo info
+  + create config
+    + rss info
+    + database info
+    + repo info
 - onStart
   - empty database
   - clone repo
