@@ -1,15 +1,18 @@
-- Main
++ Main
   + remove yarn
   + create config
     + rss info
     + database info
     + repo info
-- onStart
-  - empty database
-  - clone repo
-  - copy repo to database
++ onStart
+  + clone repo
+  - sync database
+    - add new posts
+    - edit modified posts
+    - delete deleted posts
 - onUpdate
   - pull repo
-  - add new posts
-  - edit modified posts
-  - delete deleted posts
+  - sync database
+    - add new posts
+    - edit modified posts
+    - delete deleted posts

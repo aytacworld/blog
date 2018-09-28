@@ -6,11 +6,11 @@ const db = require('./tools/db-utils');
 
 const Routes = require('./routes/index');
 
-const PORT = process.env.PORT || 8016;
+const { PORT } = require('./config');
 
 (async () => {
   await git.clone();
-  await db.initDatabase();
+  await db.sync();
 
   const app = new Express({
     templatePath: path.resolve(__dirname, 'views'),
