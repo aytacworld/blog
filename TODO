@@ -1,9 +1,12 @@
-+ Main
-  + remove yarn
-  + create config
-    + rss info
-    + repo info
-+ onStart
-  + clone repo
-- onUpdate
+- onStart
+  - clone repo
+  - add files in memory
+- onPush
   - pull repo
+  - repopulate memory
+- pubDate === createAt
+- future todo's
+  - replace memory with mongodb
+  - add comments
+  - add search
+  - instead of repopulate, only update modified files
