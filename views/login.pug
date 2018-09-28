@@ -1,8 +1,0 @@
-extends ./layout.pug
-
-block content
-  h1 Please sign in
-  form(method='POST' action='/l')
-    +form-input-req('username')
-    +form-input-req('password', 'password')
-    +form-submit()

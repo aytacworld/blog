@@ -4,5 +4,8 @@
     "node": true,
     "mongo": true,
     "jasmine": true
+  },
+  "rules": {
+    "max-len": "off"
   }
 }
