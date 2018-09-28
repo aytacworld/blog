@@ -11,6 +11,7 @@ const config = {
   repo: {
     remote: process.env.REPOSITORY || '~/test/posts-repo',
   },
+  port: process.env.PORT || 3000,
 };
 
 module.exports = config;
