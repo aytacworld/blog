@@ -40,7 +40,8 @@ class Database {
   }
 
   static getPost(id) {
-    return Object.assign({}, storage.data[id]);
+    const post = storage.data[id];
+    return post.published ? Object.assign({}, post) : null;
   }
 
   static getByTag(tag, pn) {

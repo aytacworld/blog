@@ -1,89 +1,49 @@
 const marked = require('marked');
 const { Router } = require('express');
-const Posts = require('../database/post');
+const database = require('../database/index');
 
-class Routes {
-  constructor() {
-    this.router = Router();
-    this.editPostRouting();
-    this.readPostRouting();
-    this.commentRouting();
+const router = Router();
+
+router.get('/', (req, res) => {
+  let posts = [];
+  const pn = req.query.p === 'all' ? undefined : parseInt(req.query.p, 10) || 0;
+  if (req.query.s) {
+    posts = database.search(req.query.s, pn);
+  } else if (req.query.t) {
+    posts = database.getByTag(req.query.t, pn);
+  } else {
+    posts = database.getAll(pn);
   }
+  posts = posts.map(i => Object.assign({}, i, { body: marked(i.body) }));
+  const total = database.count();
+  const tt = parseInt(total / 10, 10);
+  const nav = {
+    show: pn !== undefined,
+    prev: pn > 0 ? pn - 1 : 0,
+    next: pn < tt ? pn + 1 : tt,
+    last: tt,
+  };
+  res.render('index', { posts, nav });
+});
 
-  readPostRouting() {
-    this.router.get('/', async (req, res) => {
-      let posts = [];
-      const pg = req.query.p === 'all' ? undefined : parseInt(req.query.p, 10) || 0;
-      if (req.query.s) {
-        posts = await Posts.search(req.query.s, pg, Boolean(req.user));
-      } else if (req.user) {
-        posts = await Posts.get({}, pg);
-      } else if (req.query.t) {
-        posts = await Posts.getByTag(req.query.t, pg);
-      } else {
-        posts = await Posts.getPublished(pg);
-      }
-      const total = await Posts.count(pg);
-      const tt = parseInt(total / 10, 10);
-      const nav = {
-        show: pg !== undefined,
-        prev: pg > 0 ? pg - 1 : 0,
-        next: pg < tt ? pg + 1 : tt,
-        last: tt,
-      };
-      res.render('index', { posts, user: req.user, nav });
-    });
-
-    this.router.get('/p/:slug', async (req, res) => {
-      const post = await Posts.getBySlug(req.params.slug);
-      if ((!post) || (!req.user && !post.published)) {
-        res.redirect('/');
-      }
-      post.body = marked(post.body);
-      res.render('blog-post', { post, user: req.user });
-    });
-
-    this.router.get('/rss', async (req, res) => {
-      const posts = await Posts.getPublished();
-      res.render('rss', { posts, host: `${req.protocol}://${req.get('host')}` });
-    });
-
-    this.router.get('/s', (req, res) => {
-      res.render('search', { user: req.user });
-    });
+router.get('/p/:id', (req, res) => {
+  const post = database.getPost(req.params.id);
+  if (!post) {
+    res.redirect('/');
   }
+  post.body = marked(post.body);
+  res.render('blog-post', { post });
+});
 
-  editPostRouting() {
-    this.router.get('/e(/:id)?', async (req, res) => {
-      const resBody = { id: req.params.id, user: req.user };
-      if (req.params.id) {
-        const post = await Posts.getById(req.params.id);
-        if (post) {
-          resBody.title = post.title;
-          resBody.body = post.body;
-          resBody.tags = post.tags;
-          resBody.published = post.published;
-        }
-      }
-      res.render('edit', resBody);
-    });
+router.get('/s', (req, res) => {
+  res.render('search');
+});
 
-    this.router.post('/e', async (req, res) => {
-      if (req.body.id) {
-        await Posts.save(req.body);
-      } else {
-        await Posts.add(req.body);
-      }
-      res.redirect('/');
-    });
-  }
+module.exports = router;
 
-  commentRouting() {
-    this.router.post('/c', async (req, res) => {
-      await Posts.addComment(req.body.postid, req.body);
-      res.redirect(`/p/${req.body.postslug}`);
-    });
-  }
-}
-
-module.exports = Routes;
+//   readPostRouting() {
+//     this.router.get('/rss', async (req, res) => {
+//       const posts = await Posts.getPublished();
+//       res.render('rss', { posts, host: `${req.protocol}://${req.get('host')}` });
+//     });
+//   }
