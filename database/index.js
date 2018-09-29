@@ -26,11 +26,10 @@ class Database {
   }
 
   static getAll(page, count) {
-    if (page) {
-      console.log('111', storage.list.slice(page * count, count));
-      return mapToArray(storage.list.slice(page * count, count));
+    if (page || page === 0) {
+      const i = page * count * page;
+      return mapToArray(storage.list.slice(i, i + count));
     }
-    console.log('222', storage.list);
     return mapToArray(storage.list);
   }
 
