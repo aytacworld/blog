@@ -1,0 +1,13 @@
+extends ./layout.pug
+
+block content
+  if tags[0]
+    p To receive all blog feeds, use the following feed url:
+    a(href=`${feedUrl}/all`)= `${feedUrl}/all`
+    p If you just want to follow specific topic(s), you can use those tags:
+    each tag in tags
+      a(href=`${feedUrl}/${tag}`)= `${feedUrl}/${tag}`
+      br
+  else
+    article
+      h2 No posts

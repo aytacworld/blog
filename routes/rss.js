@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     allTags = [...allTags, ...posts[i].tags];
   }
   const tags = allTags.filter((i, p) => allTags.indexOf(i) === p);
-  res.render('rss', { tags });
+  res.render('rss', { tags, feedUrl: config.channel.atomLink });
 });
 
 function mapToRss(item) {
