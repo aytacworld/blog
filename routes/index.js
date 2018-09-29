@@ -2,6 +2,7 @@ const marked = require('marked');
 const { Router } = require('express');
 const database = require('../database/index');
 const git = require('../tools/git-utils');
+const dbUtils = require('../tools/db-utils');
 
 const router = Router();
 
@@ -43,6 +44,7 @@ router.get('/s', (req, res) => {
 router.get('/update', async (req, res) => {
   try {
     await git.pull();
+    await dbUtils.populate();
     res.sendStatus(200);
   } catch (err) {
     res.status(500).json(err);
