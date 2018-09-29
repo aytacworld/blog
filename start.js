@@ -2,22 +2,20 @@ const path = require('path');
 const Express = require('@aytacworld/express');
 
 const git = require('./tools/git-utils');
-// const db = require('./tools/db-utils');
+const dbUtils = require('./tools/db-utils');
 
-const Routes = require('./routes/index');
+const indexRouter = require('./routes/index');
 
 const { port } = require('./config');
 
 (async () => {
   await git.clone();
-  const result = await git.listChanges();
-  console.log(result);
-  // await db.sync();
+  await dbUtils.populate();
 
   const app = new Express({
     templatePath: path.resolve(__dirname, 'views'),
     routes: [
-      { route: '/', path: (new Routes()).router },
+      { route: '/', path: indexRouter },
     ],
     staticPath: { route: '/public', path: path.resolve(__dirname, 'public') },
   });

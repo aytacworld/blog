@@ -13,6 +13,7 @@ const config = {
   },
   port: process.env.PORT || 3000,
   postsDir: path.resolve(__dirname, 'repo/posts'),
+  pageItemCount: 10,
 };
 
 module.exports = config;

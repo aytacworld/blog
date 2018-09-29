@@ -1,6 +1,3 @@
-mixin blogtitle(post, user)
+mixin blogtitle(post)
   h2 #{post.title}
-    small  (#{(new Date(post.createdAt)).toISOString().split('T')[0]})
-    if user
-      small
-        a(href=`/e/${post.id}`) edit
+    small  (#{(new Date(post.pubDate)).toISOString().split('T')[0]})

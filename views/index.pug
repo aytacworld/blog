@@ -4,9 +4,9 @@ block content
   if posts[0]
     each post in posts
       article
-        a(href=`/p/${post.slug}`)
-          +blogtitle(post, user)
-        .body !{post.body.substring(0, 150)}
+        a(href=`/p/${post.id}`)
+          +blogtitle(post)
+        .body !{post.body.substring(0, 200)}...
         +tags(post)
   else
     article
