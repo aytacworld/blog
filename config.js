@@ -1,3 +1,5 @@
+const path = require('path');
+
 const config = {
   channel: {
     title: 'Hello World',
@@ -5,13 +7,12 @@ const config = {
     description: 'My personal blog',
     atomLink: 'https://adem.ayt.ac/rss',
   },
-  database: {
-    url: process.env.MONGO_URL || 'mongodb://localhost:27017/blog',
-  },
   repo: {
     remote: process.env.REPOSITORY || '~/test/posts-repo',
+    local: path.resolve(__dirname, 'repo'),
   },
   port: process.env.PORT || 3000,
+  postsDir: path.resolve(__dirname, 'repo/posts'),
 };
 
 module.exports = config;
