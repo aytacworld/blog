@@ -40,10 +40,3 @@ router.get('/s', (req, res) => {
 });
 
 module.exports = router;
-
-//   readPostRouting() {
-//     this.router.get('/rss', async (req, res) => {
-//       const posts = await Posts.getPublished();
-//       res.render('rss', { posts, host: `${req.protocol}://${req.get('host')}` });
-//     });
-//   }

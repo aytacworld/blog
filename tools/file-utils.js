@@ -8,6 +8,10 @@ function getMeta(key, data) {
 }
 
 module.exports = class File {
+  static exists(pathToCheck) {
+    return fs.existsSync(pathToCheck);
+  }
+
   static async readDir(dirPath) {
     return new Promise((resolve, reject) => {
       fs.readdir(dirPath, 'utf8', (err, data) => (err ? reject(err) : resolve(data)));

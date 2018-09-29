@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@aytacworld/express": "^1.0.5",
+    "@aytacworld/rss": "^1.0.0",
     "express": "^4.16.3",
     "marked": "^0.4.0"
   },
