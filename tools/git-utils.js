@@ -22,7 +22,7 @@ module.exports = class Git {
 
   static async pull() {
     return new Promise((resolve, reject) => {
-      exec(`cd ${local} && git --work-tree=${local} branch --set-upstream-to=origin/master master && git --work-tree=${local} pull`, err => (err ? reject(err) : resolve()));
+      exec(`cd ${local} && git pull`, err => (err ? reject(err) : resolve()));
     });
   }
 
