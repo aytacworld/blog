@@ -38,7 +38,6 @@ module.exports = class File {
       pubDate: meta.pubDate ? new Date(meta.pubDate) : new Date(),
       published: meta.published === 'true',
       body: meta.body,
-      teaser: `${meta.body.substr(0, 250)}...`,
     };
   }
 };
