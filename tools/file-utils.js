@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 function getMeta(key, data) {
-  const reg = new RegExp(`\\[\\/\\/\\]: # \\(${key}: [a-zA-Z0-9ıçÇşŞöÖüÜǧǦ\\-_, ]{4,}\\)`);
+  const reg = new RegExp(`\\[\\/\\/\\]: # \\(${key}: [a-zA-Z0-9ıçÇşŞöÖüÜǧǦ\\-_,' ]{4,}\\)`);
   const raw = reg.exec(data);
   return raw ? raw[0].replace(`[//]: # (${key}: `, '').replace(')', '') : null;
 }
