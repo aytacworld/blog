@@ -1,3 +1,5 @@
+# This project is moved to https://git.aytacworld.com/aytacworld/blog
+
 # Aytacworld Blog
 
 This project contains the source files of my personal blog.
